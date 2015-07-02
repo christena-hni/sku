@@ -9,7 +9,7 @@ function SkuMapProcessor(fs, async) {
     this.processAll = processAll;
     
     function processAll(callback) {
-        var files = ["19.skumap", "sum-chair-alum.skumap", "sum-chair-plastic.skumap", "sum-stool.skumap"];
+        var files = ["19.skumap", "sum-chair-alum.skumap", "sum-chair-plastic.skumap", "sum-stool.skumap", "hon.skumap"];
 
         async.map(
             files,

@@ -9,7 +9,8 @@ var path = require('path');
 var async = require('async');
 var express = require('express');
 var skuMapProcessor = require('./skuMapProcessor.js');
-var skuParser = require("./skuParser.js")
+var skuParser = require("./skuParser.js");
+var skuImages = require("./skuImages.js");
 
 skuMapProcessor.processAll(function(err, map) {
 
@@ -38,6 +39,20 @@ skuMapProcessor.processAll(function(err, map) {
       var properties = skuParser.testAndParse(req.params.sku, map);
       console.log(properties);
       res.json(properties);
+    });
+    
+    router.get("/url/:sku/:size/:angle", function(req, res) {
+      var sku = req.params.sku;
+      var properties = skuParser.testAndParse(sku, map);
+      var size = req.params.sku;
+      var angle = req.params.angle;
+      skuImages.one(sku, map, size, angle, function(err, url){
+        res.json({
+          url: url
+        });
+      });
+
+      
     });
     
   }

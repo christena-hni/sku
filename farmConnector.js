@@ -4,9 +4,8 @@ function FarmConnector(request, async, DOMParser, views) {
   
     this.url = url;
     
-    function url(baseS7AccountUrl, vignette, angle, options, size, imageType, callback) {
+    function url(baseS7AccountUrl, vignette, view, options, size, imageType, callback) {
        getXml(baseS7AccountUrl, vignette, function(err, xmlText){
-           var view = views.bestView(angle);
            var url = farm(baseS7AccountUrl, vignette, options, view, size, imageType, xmlText);
            callback(null, url);
        });
