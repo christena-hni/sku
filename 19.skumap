@@ -1,0 +1,24 @@
+A19-H
+	#arms
+	W
+	A
+		A
+		B
+		G
+		S
+			FC
+			{nothing}
+				.
+					#cylinder
+					2
+					3
+						.
+							#finish
+							P19
+							P80
+							P85
+							PR6
+								.
+									#fabric
+									{fabric}
+$vignette=19

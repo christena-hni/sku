@@ -1,0 +1,26 @@
+SUM-S
+	#backheight
+	H
+	M
+		#armtype
+		O
+		W
+		A
+			FC
+			{nothing}
+				.
+					#cylinder
+					4
+						.
+							#casters
+							0
+							1
+							2
+								.
+									#framecolor
+									BLK
+										.
+											#fabric
+											{fabric}
+$vignette=sumstool
+$basefinish=BLK
