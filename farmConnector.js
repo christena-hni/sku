@@ -1,78 +1,54 @@
-module.exports = new FarmConnector(require('request'), require("async"), require('xmldom').DOMParser);
+module.exports = new FarmConnector(require('request'), require("async"), require('xmldom').DOMParser, require("./views.js"));
 
-function FarmConnector(request, async, DOMParser) {
-    
-    var views = [
-        "0030",
-        "0060",
-        "0090",
-        "0120",
-        "0150",
-        "0180",
-        "0210",
-        "0240",
-        "0270",
-        "0300",
-        "0330",
-        "0360"
-    ];
-    
+function FarmConnector(request, async, DOMParser, views) {
+  
     this.url = url;
     
-    function url(baseS7AccountUrl, vignette, angle, properties, size, imageType, callback) {
+    function url(baseS7AccountUrl, vignette, angle, options, size, imageType, callback) {
        getXml(baseS7AccountUrl, vignette, function(err, xmlText){
-           var url = farm(baseS7AccountUrl, vignette, properties, angle, size, imageType, xmlText);
+           var view = views.bestView(angle);
+           var url = farm(baseS7AccountUrl, vignette, options, view, size, imageType, xmlText);
            callback(null, url);
        });
     }
     
     function getXml(baseS7AccountUrl, vignette, callback) {
-        var url = baseS7AccountUrl + "/" + vignette + "_" + views[0] + "?req=contents";
+        var url = baseS7AccountUrl + "/" + vignette + "_" + views.defaultView() + "?req=contents";
         request(url, function (error, response, body) {
           callback(error, body);
         });
     }
     
-    function getFarmTSkuString(properties) {
-        return "F-M-SB";
+    function getFarmTSkuString(options) {
+        var optionKeys = Object.keys(options);
+        var tSkuString = "";
+        optionKeys.forEach(function(key){
+           tSkuString += options[key] + "-"; 
+        });
+        return tSkuString;
     }
     
-    function getFarmTMaterials(properties) {
-        //construntors for tMaterials arr [(RO layer name), (materialname/hexcolor)]
-        var tTextile = ["UP00", "#92a342"];
-        var tTextile2 = ["UP00B", "GO40"];
-        var tMesh = ["ME00", "#151515"];
-        //var tMesh = "#c4bcab";
-        //var tMesh = "#acaba5";
-        var tMeshHr = ["MH00", "#151515"];
-        var tPaint = ["PC02", "#a7a7a7"];
-        var tPaint2 = ["PC11", "#2dd0df"];
-        var tWood = ["WD00", "CC"];
-        var tLaminate = ["", ""];
-        var tTops = ["LA00", "Z"];
-        var tCase = ["LA10", "Z"];
-        var tFronts = ["LA20", "#e9e9e9"];
-        //var tShell = "#567e7e";
-        var tShell = ["SH00", "#a7a7a7"];
-        var tEdge = ["", ""];
-        
-        //array of array [[RO layer name, Hex Color/Material],.....]
-        var tMaterials = [tTextile, tTextile2, tMesh, tMeshHr, tPaint, tPaint2, tWood, tLaminate, tShell, tEdge, tTops, tCase, tFronts];
+    function getFarmTMaterials(options) {
+       var optionKeys = Object.keys(options);
+        var tMaterials = [];
+        optionKeys.forEach(function(key){
+           tMaterials.push([key, options[key]]); 
+        });
         return tMaterials;
     }
 
     //From here down, it's farm's code
-    function farm(baseS7AccountUrl, vignette, properties, angle, size, imageType, xml){
+    function farm(baseS7AccountUrl, vignette, options, angle, size, imageType, xml){
          //  For testing.......
         //scene7 renderserver URL
-        var tUrl = baseS7AccountUrl;
+        var tUrl = baseS7AccountUrl + "/";
         //var tUrl = 'http://s7d4.scene7.com/ir/render/farmcprender/';
         
         //Published VNT name
         var tVnt = vignette;
         
         // dash delimenated product options (for finding VNT children)
-        var tSku = getFarmTSkuString(properties);
+        var tSku = getFarmTSkuString(options);
         
         // Include drop shadow
         var tDropShadowBool = true;
@@ -87,7 +63,7 @@ function FarmConnector(request, async, DOMParser) {
         //var tImageType = "jpeg";
          var tImageType = imageType;
         
-        var tMaterials = getFarmTMaterials(properties);
+        var tMaterials = getFarmTMaterials(options);
         
         
         ///////////////////////////////////////////
