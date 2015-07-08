@@ -30,6 +30,8 @@ skuMapProcessor.processAll(["./seek.skumap"],function(err, map) {
     
     router.use(express.static(path.resolve(__dirname, 'client')));
     
+    router.set('view engine', 'jade');
+    
     server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
       var addr = server.address();
       console.log("Chat server listening at", addr.address + ":" + addr.port);
@@ -47,6 +49,17 @@ skuMapProcessor.processAll(["./seek.skumap"],function(err, map) {
       var size = req.params.size;
       skuImages.all(sku, map, size, function(err, urls){
         res.json({
+          urls: urls
+        });
+      });
+    });
+    
+    router.get("/page/:sku/:size/all", function(req, res) {
+      var sku = req.params.sku;
+      var properties = skuParser.testAndParse(sku, map);
+      var size = req.params.size;
+      skuImages.all(sku, map, size, function(err, urls){
+        res.render("allviews", {
           urls: urls
         });
       });
