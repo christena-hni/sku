@@ -1,0 +1,42 @@
+k-
+	^backtype
+	m
+	p
+		^seattype
+		u
+		p
+			^glidecarter
+			g
+			c
+				^armtype
+				o
+				a
+					--frame
+					#fr
+					b
+					s
+						--firecode
+						fc
+						no
+							.
+								--shell color
+								#sh
+								bu
+								bw
+								cb
+								gn
+								gy
+								rd
+								rg
+								wt
+									.
+										--caster or 3 types of glides. doesn't matter for rendering.
+										0
+										1
+										2
+										3
+											.
+												#up
+												{fabric}
+												polyst
+$vignette=Seek

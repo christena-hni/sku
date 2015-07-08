@@ -4,9 +4,9 @@ function FarmConnector(request, async, DOMParser, views) {
   
     this.url = url;
     
-    function url(baseS7AccountUrl, vignette, view, options, size, imageType, callback) {
+    function url(baseS7AccountUrl, vignette, view, staticObjects, materials, size, imageType, callback) {
        getXml(baseS7AccountUrl, vignette, function(err, xmlText){
-           var url = farm(baseS7AccountUrl, vignette, options, view, size, imageType, xmlText);
+           var url = farm(baseS7AccountUrl, vignette, staticObjects, materials, view, size, imageType, xmlText);
            callback(null, url);
        });
     }
@@ -18,26 +18,26 @@ function FarmConnector(request, async, DOMParser, views) {
         });
     }
     
-    function getFarmTSkuString(options) {
-        var optionKeys = Object.keys(options);
+    function getFarmTSkuString(staticObjects) {
         var tSkuString = "";
-        optionKeys.forEach(function(key){
-           tSkuString += options[key] + "-"; 
+        staticObjects.forEach(function(obj){
+           tSkuString += obj + "-"; 
         });
         return tSkuString;
     }
     
     function getFarmTMaterials(options) {
-       var optionKeys = Object.keys(options);
-        var tMaterials = [];
-        optionKeys.forEach(function(key){
-           tMaterials.push([key, options[key]]); 
-        });
-        return tMaterials;
+        return options;
+    //   var optionKeys = Object.keys(options);
+    //     var tMaterials = [];
+    //     optionKeys.forEach(function(key){
+    //       tMaterials.push([key, options[key]]); 
+    //     });
+    //     return tMaterials;
     }
 
     //From here down, it's farm's code
-    function farm(baseS7AccountUrl, vignette, options, angle, size, imageType, xml){
+    function farm(baseS7AccountUrl, vignette, staticObjects, materials, angle, size, imageType, xml){
          //  For testing.......
         //scene7 renderserver URL
         var tUrl = baseS7AccountUrl + "/";
@@ -47,7 +47,7 @@ function FarmConnector(request, async, DOMParser, views) {
         var tVnt = vignette;
         
         // dash delimenated product options (for finding VNT children)
-        var tSku = getFarmTSkuString(options);
+        var tSku = getFarmTSkuString(staticObjects);
         
         // Include drop shadow
         var tDropShadowBool = true;
@@ -62,7 +62,7 @@ function FarmConnector(request, async, DOMParser, views) {
         //var tImageType = "jpeg";
          var tImageType = imageType;
         
-        var tMaterials = getFarmTMaterials(options);
+        var tMaterials = getFarmTMaterials(materials);
         
         
         ///////////////////////////////////////////

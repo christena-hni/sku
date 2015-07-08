@@ -12,7 +12,7 @@ var skuMapProcessor = require('./skuMapProcessor.js');
 var skuParser = require("./skuParser.js");
 var skuImages = require("./skuImages.js");
 
-skuMapProcessor.processAll(function(err, map) {
+skuMapProcessor.processAll(["./seek.skumap"],function(err, map) {
 
   if(err) {
     console.log(err);
@@ -41,19 +41,30 @@ skuMapProcessor.processAll(function(err, map) {
       res.json(properties);
     });
     
+    router.get("/url/:sku/:size/all", function(req, res) {
+      var sku = req.params.sku;
+      var properties = skuParser.testAndParse(sku, map);
+      var size = req.params.size;
+      skuImages.all(sku, map, size, function(err, urls){
+        res.json({
+          urls: urls
+        });
+      });
+    });
+    
     router.get("/url/:sku/:size/:angle", function(req, res) {
       var sku = req.params.sku;
       var properties = skuParser.testAndParse(sku, map);
-      var size = req.params.sku;
+      var size = req.params.size;
       var angle = req.params.angle;
       skuImages.one(sku, map, size, angle, function(err, url){
         res.json({
           url: url
         });
       });
-
-      
     });
+    
+    
     
   }
 });

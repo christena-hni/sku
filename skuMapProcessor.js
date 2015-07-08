@@ -8,8 +8,7 @@ function SkuMapProcessor(fs, async) {
     
     this.processAll = processAll;
     
-    function processAll(callback) {
-        var files = ["19.skumap", "sum-chair-alum.skumap", "sum-chair-plastic.skumap", "sum-stool.skumap", "hon.skumap"];
+    function processAll(files, callback) {
 
         async.map(
             files,
@@ -64,9 +63,13 @@ function SkuMapProcessor(fs, async) {
             skuParts[depth] = [];
         }
         var text = line.trim();
-        //check if it's header
-        if(/^#/.test(text)) {
-            headers[depth] = /\w+/.exec(text).toString();
+        //check for comments
+        if(/^\-\-/.test(text)){
+            //do nothing
+        }
+        //check if it's option
+        else if(/^#|\^/.test(text)) {
+            headers[depth] = text;
         } 
         //or constant
         else if(/^\$/.test(text)) {
