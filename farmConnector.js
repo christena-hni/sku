@@ -219,7 +219,7 @@ function FarmConnector(request, async, DOMParser, views) {
         
         
             function SetTheUrl(iUrl, iVnt, iDropShadow, iMaterials, iView, iRes, iImageType, iNodesArray, iAllNodesArray) {
-        
+
                 //Start the URL
                 var tmainUrl = iUrl + iVnt + "_" + farmS7.tFrame + "?wid=" + iRes + "&fmt=" + iImageType + "&qlt=100&";
         
@@ -236,10 +236,24 @@ function FarmConnector(request, async, DOMParser, views) {
                         if (tSubGroup === "drop" && iDropShadow) {
                             tmainUrl = tmainUrl + "obj=" + iNodesArray[i1][1] + "/drop&show&"
                         }
+        
+                        // default Material Bool
+                        var tDefaultMaterial = false;
+        
+                        // set the boolean for a material match
+                        var tMatchedMatNode = false;
+        
                         for (var i3 = 0; iNodesArray[i1][0].childNodes[i2].childNodes && i3 < iNodesArray[i1][0].childNodes[i2].childNodes.length; i3++) {
                             var nodeToUse = iNodesArray[i1][0].childNodes[i2].childNodes[i3];
         
+        
                             if (nodeToUse.nodeName !== "group") {
+        
+                                //found default material
+                                if (getID(nodeToUse) === "dflt") {
+                                    // set the default object boolean
+                                    tDefaultMaterial = true;
+                                }
         
                                 // go through iMaterials
                                 for (var i4 = 0; i4 < iMaterials.length; i4++) {
@@ -257,6 +271,7 @@ function FarmConnector(request, async, DOMParser, views) {
                                                 tmainUrl = tmainUrl + "color=" + iMaterials[i4][1].replace("#", "") + "&";
                                             }
                                         }
+                                        tMatchedMatNode = true;
                                         tmainUrl = tmainUrl + "show&";
                                     }
                                     //run color through for static overlap
@@ -278,6 +293,13 @@ function FarmConnector(request, async, DOMParser, views) {
                             }
         
                         }
+        
+                        //Check for default material and assign
+                        if (tMatchedMatNode === false && tDefaultMaterial === true) {
+                            //  add to URL
+                            tmainUrl = tmainUrl + "obj=" + iNodesArray[i1][1] + "/" + tSubGroup + "/" + "dflt" + "&show&";
+                            var t = tmainUrl;
+                        }
                     }
                 }
         
@@ -286,7 +308,7 @@ function FarmConnector(request, async, DOMParser, views) {
                 }
         
                 return tmainUrl;
-            }
+            } 
         
             // set xml file
             //farmS7.xmlDoc = loadXmlFromS7V(farmS7.xmlUrl);

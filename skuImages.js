@@ -1,7 +1,7 @@
 module.exports = new (function(skuParser, async, views, farmConnector){
     this.one = one;
     this.all = all;
-    var baseS7AccountUrl = "http://s7d4.scene7.com/ir/render/farmcprender";
+    var baseS7AccountUrl = "http://s7d4.scene7.com/ir/render/AllsteelRender";
     function one(sku, map, size, angle, callback) {
         var options = skuParser.testAndParse(sku, map);
         var view = views.bestView(angle);
