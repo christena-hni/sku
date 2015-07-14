@@ -5,7 +5,7 @@ function SkuParser(materials){
         var expressions = Object.keys(map);
         for (var i = 0; i < expressions.length; i++) {
             var expression = expressions[i];
-            if(new RegExp(expression).test(sku)){
+            if(new RegExp(expression, "i").test(sku)){
                 var result = parse(sku, map[expression]);
                 return result;
             }
@@ -19,7 +19,7 @@ function SkuParser(materials){
             staticObjects: [],
             materials: []
         };
-        var matches = sku.match(new RegExp(skumapItem.pattern));
+        var matches = sku.match(new RegExp(skumapItem.pattern, "i"));
         for (var i = 0; i < skumapItem.headers.length; i++) {
             var header = skumapItem.headers[i];
             if(header) {

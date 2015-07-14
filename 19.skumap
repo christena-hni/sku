@@ -1,7 +1,8 @@
 A19-H
-	#arms
+	^arms
 	W
 	A
+		^framefinish
 		A
 		B
 		G
@@ -9,16 +10,16 @@ A19-H
 			FC
 			{nothing}
 				.
-					#cylinder
+					--cylinder
 					2
 					3
 						.
-							#finish
+							--finish
 							P19
 							P80
 							P85
 							PR6
 								.
-									#fabric
+									#up
 									{fabric}
 $vignette=19

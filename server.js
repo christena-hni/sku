@@ -12,7 +12,7 @@ var skuMapProcessor = require('./skuMapProcessor.js');
 var skuParser = require("./skuParser.js");
 var skuImages = require("./skuImages.js");
 
-skuMapProcessor.processAll(["./seek.skumap"],function(err, map) {
+skuMapProcessor.processAll(["./seek.skumap", "./19.skumap", "./nimble-polished.skumap", "./nimble-powdercoat.skumap"],function(err, map) {
 
   if(err) {
     console.log(err);
