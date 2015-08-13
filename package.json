@@ -7,10 +7,12 @@
   "author": "Mostafa Eweda <mo.eweda@gmail.com>",
   "dependencies": {
     "async": "~0.2.8",
+    "csvtojson": "^0.4.2",
     "express": "~3.2.4",
     "jade": "^1.11.0",
     "request": "^2.58.0",
     "socket.io": "~0.9.14",
+    "underscore": "^1.8.3",
     "xmldom": "^0.1.19"
   }
 }
