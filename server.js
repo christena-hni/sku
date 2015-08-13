@@ -27,22 +27,22 @@ skuMapProcessor.processAll(["./seek.skumap", "./19.skumap", "./nimble-polished.s
     //
     var router = express();
     var server = http.createServer(router);
-    
+
     router.use(express.static(path.resolve(__dirname, 'client')));
-    
+
     router.set('view engine', 'jade');
-    
+
     server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
       var addr = server.address();
-      console.log("Chat server listening at", addr.address + ":" + addr.port);
+      console.log("Product image API server listening at", addr.address + ":" + addr.port);
     });
-    
+
     router.get("/breakdown/:sku", function(req, res) {
       var properties = skuParser.testAndParse(req.params.sku, map);
       console.log(properties);
       res.json(properties);
     });
-    
+
     router.get("/url/:sku/:size/all", function(req, res) {
       var sku = req.params.sku;
       var properties = skuParser.testAndParse(sku, map);
@@ -53,7 +53,7 @@ skuMapProcessor.processAll(["./seek.skumap", "./19.skumap", "./nimble-polished.s
         });
       });
     });
-    
+
     router.get("/page/:sku/:size/all", function(req, res) {
       var sku = req.params.sku;
       var properties = skuParser.testAndParse(sku, map);
@@ -64,7 +64,7 @@ skuMapProcessor.processAll(["./seek.skumap", "./19.skumap", "./nimble-polished.s
         });
       });
     });
-    
+
     router.get("/url/:sku/:size/:angle", function(req, res) {
       var sku = req.params.sku;
       var properties = skuParser.testAndParse(sku, map);
@@ -76,10 +76,8 @@ skuMapProcessor.processAll(["./seek.skumap", "./19.skumap", "./nimble-polished.s
         });
       });
     });
-    
-    
-    
+
+
+
   }
 });
-
-
