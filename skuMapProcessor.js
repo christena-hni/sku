@@ -2,12 +2,12 @@ module.exports = new SkuMapProcessor(require("fs"), require("async"));
 
 function SkuMapProcessor(fs, async) {
     var variables = {
-        "fabric": "[a-zA-Z]+[0-9]+",
+        "fabric": "\\w+",
         "nothing": ""
     };
-    
+
     this.processAll = processAll;
-    
+
     function processAll(files, callback) {
 
         async.map(
@@ -30,17 +30,17 @@ function SkuMapProcessor(fs, async) {
                 callback(err, skuMap);
             }
         );
-        
-        
+
+
     }
-    
+
     function process(text) {
         var skuParts = [];
         var headers = [];
         var constants = {};
         var lines = text.toString().split('\n');
         lines.forEach(function(line){
-            processLine(line, skuParts, headers, constants); 
+            processLine(line, skuParts, headers, constants);
         });
         var pattern = buildPattern(skuParts);
         return {
@@ -49,13 +49,13 @@ function SkuMapProcessor(fs, async) {
             constants: constants
         }
     }
-    
+
     function countTabs(line) {
         var matches = line.match(/\t/g);
         if(!matches) { return 0; }
         return matches.length;
     }
-    
+
     function processLine(line, skuParts, headers, constants) {
 
         var depth = countTabs(line);
@@ -70,7 +70,7 @@ function SkuMapProcessor(fs, async) {
         //check if it's option
         else if(/^#|\^/.test(text)) {
             headers[depth] = text;
-        } 
+        }
         //or constant
         else if(/^\$/.test(text)) {
             parseConstant(text, constants);
@@ -80,24 +80,24 @@ function SkuMapProcessor(fs, async) {
             skuParts[depth].push(text);
         }
     }
-    
+
     function parseConstant(text, constants) {
         var key = /^\$[\w]+/.exec(text).toString();
         key = key.replace('$', '');
-        
+
         var value = /[\w\s]+$/.exec(text).toString().trim();
-        
+
         constants[key] = value;
-        
+
     }
-    
+
     function buildPattern(skuParts) {
         var pattern = "^";
         for(var i = 0; i < skuParts.length; i++) {
             var parts = skuParts[i];
             var patternBlock = "";
-           
-    
+
+
             for(var j = 0; j < parts.length; j++) {
                 if(j > 0){
                     patternBlock += "|";
@@ -113,25 +113,25 @@ function SkuMapProcessor(fs, async) {
                     patternBlock += escapeRegExp(part);
                 }
             }
-            
+
             //wrap in parenthesis for capture.
             patternBlock = "(" + patternBlock + ")";
-           
-    
+
+
             pattern += patternBlock;
         };
         pattern += "$";
         return pattern;
     }
-    
+
     function escapeRegExp(str) {
       return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
     }
-    
+
     function isVariable(line) {
         return /\{\w+\}/.test(line);
     }
-    
+
     function getPatternForVariable(line) {
         var variableName = /\w+/.exec(line).toString();
         return variables[variableName];
