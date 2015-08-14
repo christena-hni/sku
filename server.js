@@ -77,7 +77,10 @@ skuMapProcessor.processAll(["./seek.skumap", "./19.skumap", "./nimble-polished.s
       });
     });
 
+    router.get('/', function (req, res) {
 
 
+      res.render('index', { title: 'All Products', products: [{ name: "#19" }, { name: "Acuity" }] });
+    });
   }
 });

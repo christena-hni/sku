@@ -1,7 +1,8 @@
 var fs = require("fs")
 
 module.exports = new (function(){
-    var materials = JSON.parse(fs.readFileSync('./data/materials.json', 'utf8'));    
+    var materials = JSON.parse(fs.readFileSync('./data/materials.json', 'utf8'));
+    console.log(materials);
     this.getOption = getOption;
     this.has = has;
     function getOption(name, value) {
