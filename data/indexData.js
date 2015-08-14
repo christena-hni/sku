@@ -72,7 +72,7 @@ converter.on("end_parsed", function(json) {
     }
   });
 
-  fs.writeFile("textiles.json", JSON.stringify(textiles), function(err) {
+  fs.writeFile("textiles.json", JSON.stringify(textiles, null, 4), function(err) {
     if(err) {
         return console.log(err);
     };
