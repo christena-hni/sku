@@ -74,5 +74,10 @@ skuMapProcessor.processAll(skus,function(err, map) {
     router.get('/', function (req, res) {
       res.render('index', { title: 'All Products', products: [{ name: "#19" }, { name: "Acuity" }] });
     });
+
+    // router.get('/configurator/:product', function (req, res) {
+    //   var file = req.params.product + '.html';
+    //   res.sendFile(file, { root: path.join(__dirname, 'views', 'configurator') });
+    // });
   }
 });
