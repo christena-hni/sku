@@ -1,30 +1,24 @@
-//
-// # SimpleServer
-//
-// A simple chat server using Socket.IO, Express, and Async.
-//
 var http = require('http');
 var path = require('path');
-
 var async = require('async');
 var express = require('express');
+var _ = require("underscore");
+
 var skuMapProcessor = require('./skuMapProcessor.js');
 var skuParser = require("./skuParser.js");
 var skuImages = require("./skuImages.js");
+var baseSkuMapsDirectory = "./data/skuMaps/";
 
-skuMapProcessor.processAll(["./seek.skumap", "./19.skumap", "./nimble-polished.skumap", "./nimble-powdercoat.skumap"],function(err, map) {
+//TODO: Scan and load all SKU Maps from the base folder instead of specify each one manually
+var skus = _.map(["seek.skumap", "19.skumap", "nimble-polished.skumap", "nimble-powdercoat.skumap"], function(sku) {
+  return path.join(baseSkuMapsDirectory, sku);
+});
 
+skuMapProcessor.processAll(skus,function(err, map) {
   if(err) {
     console.log(err);
   }
   else {
-
-    //
-    // ## SimpleServer `SimpleServer(obj)`
-    //
-    // Creates a new instance of SimpleServer with the following options:
-    //  * `port` - The HTTP port to listen on. If `process.env.PORT` is set, _it overrides this value_.
-    //
     var router = express();
     var server = http.createServer(router);
 
@@ -78,8 +72,6 @@ skuMapProcessor.processAll(["./seek.skumap", "./19.skumap", "./nimble-polished.s
     });
 
     router.get('/', function (req, res) {
-
-
       res.render('index', { title: 'All Products', products: [{ name: "#19" }, { name: "Acuity" }] });
     });
   }

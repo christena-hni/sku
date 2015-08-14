@@ -2,8 +2,8 @@ var fs = require("fs");
 var _ = require("underscore");
 
 module.exports = new (function(){
-    var textiles = JSON.parse(fs.readFileSync('./data/textiles.json', 'utf8'));
-    var materials = JSON.parse(fs.readFileSync('./data/materials.json', 'utf8'));
+    var textiles = JSON.parse(fs.readFileSync('./data/materials/textiles.json', 'utf8'));
+    var materials = JSON.parse(fs.readFileSync('./data/materials/materials.json', 'utf8'));
 
     //Merging both materials loaded from disk
     for(var prop in textiles) {
