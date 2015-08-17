@@ -91,8 +91,7 @@ skuMapProcessor.processAll(skus, function (err, map) {
             var angle = req.query.angle;
 
             skuImages.one(sku, map, size, angle, function (err, url) {
-                res.setHeader('Content-Type', 'application/json');
-                res.send(JSON.stringify({ url: url }));
+                res.json({ url: url });
             });
         });
 
@@ -105,8 +104,7 @@ skuMapProcessor.processAll(skus, function (err, map) {
             var size = req.query.size;
 
             skuImages.all(sku, map, size, function (err, urls) {
-                res.setHeader('Content-Type', 'application/json');
-                res.send(JSON.stringify(urls));
+                res.json(urls);
             });
         });
     }
