@@ -1,0 +1,21 @@
+{
+  "name": "sku",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Allsteel/sku",
+  "authors": [
+    "tucaz <me@tucaz.net>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#1.0.0",
+    "paper-radio-group": "PolymerElements/paper-radio-group#~1.0.4",
+    "paper-radio-button": "PolymerElements/paper-radio-button#~1.0.6"
+  }
+}

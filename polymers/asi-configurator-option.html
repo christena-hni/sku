@@ -1,0 +1,38 @@
+<dom-module id="asi-configurator-option">
+    <style>
+        :host {
+            display:block;
+        }
+    </style>
+    <template>
+      <div>
+        <paper-radio-group>
+        <template is="dom-repeat" items="{{options}}">
+            <paper-radio-button on-change="_onChange" name="{{item}}">{{item}}</paper-radio-button>
+        </template>
+        </paper-radio-group>
+      </div>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: "asi-configurator-option",
+        _onChange: function(e) {
+          this.fire("option-changed", { value: "cachorrinho" })
+        }
+        // ,
+        // addFilter: function (e) {
+        //     this._filterApply( e.model.filter.Title, e.model.filter.Path );
+        // },
+        // removeFilter: function (e) {
+        //     this._filterApply( e.model.item.Value, e.model.item.UnselectPath );
+        // },
+        // _filterApply: function( name, path ) {
+        //     this.fire( 'facet-click', {name:name, path:path});
+        // },
+        // _hasApplied: function ( selected ) {
+        //     return selected.length > 0;
+        // }
+    });
+</script>
