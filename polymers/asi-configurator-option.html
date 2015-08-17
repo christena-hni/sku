@@ -6,6 +6,9 @@
     </style>
     <template>
       <div>
+        <label>{{label}}</label><label>{{selected}}</label>
+      </div>
+      <div>
         <paper-radio-group id="group" selected="{{selected}}">
         <template is="dom-repeat" items="{{options}}">
             <paper-radio-button on-change="_onOptionChanged" name="{{item}}">{{item}}</paper-radio-button>
@@ -23,6 +26,7 @@
         },
         properties: {
           options: Array,
+          label: String,
           selected: {
             type: String,
             reflectToAttribute: true
