@@ -9,7 +9,7 @@
       <div>
         <h1>#19</h1>
       </div>
-      <asi-configurator-option id="arms" options="{{armsOptions}}"></asi-configurator-option>
+      <asi-configurator-option id="arms" selected="{{state.selectedArm}}" options="{{armsOptions}}"></asi-configurator-option>
       <div>
         <p>Frame Finish: Aluma</p>
         <ul>
@@ -47,22 +47,26 @@
     Polymer({
         is: "asi-configurator-product",
         ready: function() {
-          this.armsOptions = [ "With", "Without" ];
-          this.sku = "A19-HWG.2.P19.DOL719";
+          this.armsOptions = ["With", "Without"];
+
+          this.state = {
+            selectedArm: "With"
+          };
+
+          this._updateSku();
         },
         listeners: {
             'option_changed': '_onArmsOptionChanged'
         },
         _onArmsOptionChanged: function(e) {
-          this._updateSku(e.type, e.detail.value);
+          this.state.selectedArm = e.detail.value;
+          this._updateSku();
         },
         _updateSku: function(eventType, eventData) {
-          if(eventType === "option_changed") {
-            if(eventData === "With")
-              this.sku = "A19-HWG.2.P19.DOL719";
-            else
-              this.sku = "A19-HAG.2.P19.DOL719";
-          }
+          if(this.state.selectedArm === "With")
+            this.sku = "A19-HWG.2.P19.DOL719";
+          else
+            this.sku = "A19-HAG.2.P19.DOL719";
         }
     });
 </script>
