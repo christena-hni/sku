@@ -5,11 +5,11 @@
         }
     </style>
     <template>
-      <asi-configurator-product-image sku="{{sku}}"></asi-configurator-product-image>
+      <asi-configurator-product-image id="product-image" sku="{{sku}}"></asi-configurator-product-image>
       <div>
-        <h1>{{product.name}}
+        <h1>#19</h1>
       </div>
-      <asi-configurator-option options="{{armsOptions}}"></asi-configurator-option>
+      <asi-configurator-option id="arms" options="{{armsOptions}}"></asi-configurator-option>
       <div>
         <p>Frame Finish: Aluma</p>
         <ul>
@@ -51,13 +51,18 @@
           this.sku = "A19-HWG.2.P19.DOL719";
         },
         listeners: {
-            'option-changed': '_armsOptionChanged'
+            'option_changed': '_onArmsOptionChanged'
         },
-        _armsOptionChanged: function(e) {
-          console.log(e);
+        _onArmsOptionChanged: function(e) {
+          this._updateSku(e.type, e.detail.value);
         },
-        properties: {
-
+        _updateSku: function(eventType, eventData) {
+          if(eventType === "option_changed") {
+            if(eventData === "With")
+              this.sku = "A19-HWG.2.P19.DOL719";
+            else
+              this.sku = "A19-HAG.2.P19.DOL719";
+          }
         }
     });
 </script>

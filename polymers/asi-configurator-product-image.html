@@ -5,9 +5,9 @@
         }
     </style>
     <template>
+      <iron-ajax auto url="" id="ajax" handle-as="json" on-response="_onResponseReceived" last-response="{{result}}"></iron-ajax>
       <div id="product-image">
-        <label>{{sku}}</label>
-        <img src="{{product.image}}" alt="{{product.name}}">
+        <img src="{{product.image}}">
       </div>
     </template>
 </dom-module>
@@ -15,24 +15,22 @@
 <script>
     Polymer({
         is: "asi-configurator-product-image",
-        ready: function() {
-          this.product = {
-              image: "http://s7d4.scene7.com/ir/render/AllsteelRender/19_0030?wid=1000&fmt=png-alpha&qlt=100&obj=root/fram1/g&show&obj=root/uphl1/up11&color=C33217&show&obj=root/drop&show&obj=root/stat&show&obj=root/arms/w/fram1/g&show&obj=root/arms/w/stat&show&obj=root&req=object",
-              name: "#19"
-          };
+        created: function() {
+          this.baseApiUrl = "http://localhost:3000/api/products/";
+        },
+        _onSkuChanged: function(e) {
+          if(this.sku && this.sku.length != 0) {
+              this.$.ajax.url = this.baseApiUrl + this.sku;
+          }
+        },
+        _onResponseReceived: function(e) {
+          this.product = { image: this.result.url };
+        },
+        properties: {
+          sku: {
+            type: String,
+            observer: "_onSkuChanged"
+          }
         }
-        // ,
-        // addFilter: function (e) {
-        //     this._filterApply( e.model.filter.Title, e.model.filter.Path );
-        // },
-        // removeFilter: function (e) {
-        //     this._filterApply( e.model.item.Value, e.model.item.UnselectPath );
-        // },
-        // _filterApply: function( name, path ) {
-        //     this.fire( 'facet-click', {name:name, path:path});
-        // },
-        // _hasApplied: function ( selected ) {
-        //     return selected.length > 0;
-        // }
     });
 </script>
