@@ -18,8 +18,8 @@ module.exports = new (function(skuParser, async, views, farmConnector){
         var allViews = views.allViews();
         async.map(
             allViews,
-            function(view, callback) {
-                get(baseS7AccountUrl, vignette, view, options.staticObjects, options.materials, size, "png-alpha", callback);
+            function(view, itemCallback) {
+                get(baseS7AccountUrl, vignette, view, options.staticObjects, options.materials, size, "png-alpha", itemCallback);
             },
             callback
             );
