@@ -6,7 +6,7 @@
     </style>
     <template>
       <div>
-        <paper-radio-group>
+        <paper-radio-group id="group" selected="{{selected}}">
         <template is="dom-repeat" items="{{options}}">
             <paper-radio-button on-change="_onOptionChanged" name="{{item}}">{{item}}</paper-radio-button>
         </template>
@@ -20,6 +20,13 @@
         is: "asi-configurator-option",
         _onOptionChanged: function(e) {
           this.fire("option_changed", { value: e.model.item })
+        },
+        properties: {
+          options: Array,
+          selected: {
+            type: String,
+            reflectToAttribute: true
+          }
         }
     });
 </script>
