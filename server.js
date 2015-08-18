@@ -1,13 +1,14 @@
-var http = require('http');
-var path = require('path');
-var async = require('async');
-var express = require('express');
-var _ = require("underscore");
+var http = require('http'),
+    path = require('path'),
+    async = require('async'),
+    express = require('express'),
+    _ = require("underscore")
+    cors = require("cors");
 
-var skuMapProcessor = require('./skuMapProcessor.js');
-var skuParser = require("./skuParser.js");
-var skuImages = require("./skuImages.js");
-var baseSkuMapsDirectory = "./data/skuMaps/";
+var skuMapProcessor = require('./skuMapProcessor.js'),
+    skuParser = require("./skuParser.js"),
+    skuImages = require("./skuImages.js"),
+    baseSkuMapsDirectory = "./data/skuMaps/";
 
 //TODO: Scan and load all SKU Maps from the base folder instead of specify each one manually
 var skus = _.map(["seek.skumap", "19.skumap", "nimble-polished.skumap", "nimble-powdercoat.skumap"], function (sku) {
@@ -23,8 +24,7 @@ skuMapProcessor.processAll(skus, function (err, map) {
         var server = http.createServer(app);
 
         app.use(express.static(path.resolve(__dirname, 'client')));
-        app.use('/bower_components', express.static(__dirname + '/bower_components'));
-        app.use('/polymers', express.static(__dirname + '/polymers'));
+        app.use(cors());
 
         app.set('view engine', 'jade');
 

@@ -1,6 +1,6 @@
 module.exports = new (function(skuParser, async, views, farmConnector){
     var baseS7AccountUrl = "http://s7d4.scene7.com/ir/render/AllsteelRender";
-    var defaultSize = 1000;
+    var defaultSize = 600;
     var defaultImageFormat = "png-alpha";
 
     this.one = one;
