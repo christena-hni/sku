@@ -5,14 +5,14 @@ function FarmConnector(request, async, DOMParser, views) {
     this.url = url;
     
     function url(baseS7AccountUrl, vignette, view, staticObjects, materials, size, imageType, callback) {
-       getXml(baseS7AccountUrl, vignette, function(err, xmlText){
+       getXml(baseS7AccountUrl, vignette, view, function(err, xmlText){
            var url = farm(baseS7AccountUrl, vignette, staticObjects, materials, view, size, imageType, xmlText);
-           callback(null, url);
        });
     }
     
-    function getXml(baseS7AccountUrl, vignette, callback) {
-        var url = baseS7AccountUrl + "/" + vignette + "_" + views.defaultView() + "?req=contents";
+    function getXml(baseS7AccountUrl, vignette, view, callback) {
+        var url = baseS7AccountUrl + "/" + vignette + "_" + view + "?req=contents";
+        console.log(url);
         request(url, function (error, response, body) {
           callback(error, body);
         });
