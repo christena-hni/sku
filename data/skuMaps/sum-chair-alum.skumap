@@ -1,8 +1,8 @@
 SUM-
-	#backheight
+	^backheight
 	H
 	M
-		#armtype
+		^armtype
 		O
 		W
 		A
@@ -10,22 +10,22 @@ SUM-
 				FC
 				{nothing}
 					.
-						#cylinder
+						^cylinder
 						2
 						3
 							.
-								#casters
+								^casters
 								0
 								1
 									.
 										A1
 											.
-												#basefinish
+												^basefinish
 												PAL
 													.
-														#framecolor
+														^framecolor
 														BLK
 															.
-																#fabric
+																#up
 																{fabric}
 $vignette=sumchair
