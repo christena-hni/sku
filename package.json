@@ -7,6 +7,7 @@
   "author": "Mateus Brant <brantm@allsteeloffice.com>",
   "dependencies": {
     "async": "~0.2.8",
+    "cors": "^2.7.1",
     "csvtojson": "^0.4.2",
     "express": "~3.2.4",
     "jade": "^1.11.0",
