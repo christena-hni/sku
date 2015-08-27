@@ -2,7 +2,7 @@ A19-H
 	^arms
 	W
 	A
-		^framefinish
+		--framefinish
 		A
 		B
 		G
@@ -14,7 +14,7 @@ A19-H
 					2
 					3
 						.
-							--finish
+							^finish
 							P19
 							P80
 							P85
