@@ -12,7 +12,7 @@ k-
 				o
 				a
 					--frame
-					#fr
+					^fr
 					b
 					s
 						--firecode
@@ -20,7 +20,7 @@ k-
 						no
 							.
 								--shell color
-								#sh
+								^sh
 								bu
 								bw
 								cb
