@@ -38,15 +38,17 @@ function SkuMapProcessor(fs, async) {
         var skuParts = [];
         var headers = [];
         var constants = {};
+        var aliases = {};
         var lines = text.toString().split('\n');
         lines.forEach(function(line){
-            processLine(line, skuParts, headers, constants);
+            processLine(line, skuParts, headers, constants, aliases);
         });
         var pattern = buildPattern(skuParts);
         return {
             headers: headers,
             pattern: pattern,
-            constants: constants
+            constants: constants,
+            aliases: aliases
         }
     }
 
@@ -56,7 +58,7 @@ function SkuMapProcessor(fs, async) {
         return matches.length;
     }
 
-    function processLine(line, skuParts, headers, constants) {
+    function processLine(line, skuParts, headers, constants, aliases) {
 
         var depth = countTabs(line);
         if(!skuParts[depth]){
@@ -77,7 +79,18 @@ function SkuMapProcessor(fs, async) {
         }
         else
         {
-            skuParts[depth].push(text);
+            //check for aliases. i.e.: P19=frameP19, like Mimeo
+            if(/\w+\=\w+/.test(text)) {
+              console.log("passou");
+              var parts = text.trim().split('=');
+              var key = parts[0];
+              var alias = parts[1];
+              aliases[headers[depth] + key] = alias;
+              skuParts[depth].push(key);
+            }
+            else {
+              skuParts[depth].push(text);
+            }
         }
     }
 

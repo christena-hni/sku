@@ -12,7 +12,7 @@ function SkuParser(materials){
         }
         return null;
     }
-    
+
     function parse(sku, skumapItem) {
         var properties = {
             constants: skumapItem.constants,
@@ -27,6 +27,10 @@ function SkuParser(materials){
                 var value = matches[i + 1];
                 //if static overlap
                 if(/^\^/.test(header)) {
+                    //overriding with alias if found
+                    if(skumapItem.aliases[header+value]) {
+                      value = skumapItem.aliases[header+value];
+                    }
                     properties.staticObjects.push(value);
                 }
                 //if materials
