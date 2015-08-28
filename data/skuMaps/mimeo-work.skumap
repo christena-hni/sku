@@ -29,9 +29,9 @@ miw-k
 											4
 												.
 													^caster
-													h=casterh
-													b=casterb
-													t=castert
+													h
+													b
+													t
 														.
 															^knit
 															km07

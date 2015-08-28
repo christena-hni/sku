@@ -28,8 +28,8 @@ function SkuParser(materials){
                 //if static overlap
                 if(/^\^/.test(header)) {
                     //overriding with alias if found
-                    if(skumapItem.aliases[header+value]) {
-                      value = skumapItem.aliases[header+value];
+                    if(skumapItem.aliases[header.toUpperCase()+value.toUpperCase()]) {
+                      value = skumapItem.aliases[header.toUpperCase()+value.toUpperCase()];
                     }
                     properties.staticObjects.push(value);
                 }

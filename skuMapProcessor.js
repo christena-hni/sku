@@ -81,11 +81,10 @@ function SkuMapProcessor(fs, async) {
         {
             //check for aliases. i.e.: P19=frameP19, like Mimeo
             if(/\w+\=\w+/.test(text)) {
-              console.log("passou");
               var parts = text.trim().split('=');
               var key = parts[0];
               var alias = parts[1];
-              aliases[headers[depth] + key] = alias;
+              aliases[headers[depth].toUpperCase() + key.toUpperCase()] = alias;
               skuParts[depth].push(key);
             }
             else {

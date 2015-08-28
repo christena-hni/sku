@@ -7,7 +7,7 @@ mis-k
 		no.
 			^frame
 			blk=frameblk
-			t=framt
+			t=framet
 				.
 					^base
 					blk=baseblk
@@ -29,9 +29,9 @@ mis-k
 											4
 												.
 													^caster
-													h=casterh
-													b=casterb
-													t=castert
+													h=b
+													b
+													t
 														.
 															^knit
 															km07
