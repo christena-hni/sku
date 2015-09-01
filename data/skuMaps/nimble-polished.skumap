@@ -7,7 +7,7 @@ GSA-
 			1
 			2
 				.
-					#sh
+					^sh
 					BW
 					RD
 					WT
