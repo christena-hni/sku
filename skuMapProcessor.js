@@ -2,7 +2,7 @@ module.exports = new SkuMapProcessor(require("fs"), require("async"));
 
 function SkuMapProcessor(fs, async) {
     var variables = {
-        "fabric": "\\w+",
+        "fabric": "\\w+[0-9]",
         "nothing": ""
     };
 
