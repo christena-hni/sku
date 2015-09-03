@@ -8,6 +8,7 @@ GSA-
 			2
 				.
 					^sh
+					BLK=CB
 					BW
 					RD
 					WT
@@ -16,5 +17,4 @@ GSA-
 					GY
 					BU
 					RG
-					TWTH
 $vignette=Nimble

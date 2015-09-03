@@ -12,6 +12,7 @@ GSA-
 					PR6
 						.
 							^sh
+							BLK=CB
 							BW
 							RD
 							WT
@@ -20,5 +21,4 @@ GSA-
 							GY
 							BU
 							RG
-							TWTH
 $vignette=Nimble
