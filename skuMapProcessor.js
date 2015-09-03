@@ -5,16 +5,16 @@ function SkuMapProcessor(fs, async) {
         "fabric": "\\w+[0-9]",
         "nothing": ""
     };
-
+    
     this.processAll = processAll;
-
+    
     function processAll(files, callback) {
-
+        
         async.map(
             files,
-            function(file, callback) {
-                fs.readFile(file, 'utf8', function(err, text){
-                    if(err) {
+            function (file, callback) {
+                fs.readFile(file, 'utf8', function (err, text) {
+                    if (err) {
                         callback(err, null);
                         return;
                     }
@@ -22,9 +22,9 @@ function SkuMapProcessor(fs, async) {
                     callback(null, mapItem)
                 })
             },
-            function(err, results){
+            function (err, results) {
                 var skuMap = [];
-                results.forEach(function(result) {
+                results.forEach(function (result) {
                     skuMap[result.pattern] = result;
                 })
                 callback(err, skuMap);
@@ -33,14 +33,14 @@ function SkuMapProcessor(fs, async) {
 
 
     }
-
+    
     function process(text) {
         var skuParts = [];
         var headers = [];
         var constants = {};
         var aliases = {};
         var lines = text.toString().split('\n');
-        lines.forEach(function(line){
+        lines.forEach(function (line) {
             processLine(line, skuParts, headers, constants, aliases);
         });
         var pattern = buildPattern(skuParts);
@@ -51,72 +51,76 @@ function SkuMapProcessor(fs, async) {
             aliases: aliases
         }
     }
-
+    
     function countTabs(line) {
         var matches = line.match(/\t/g);
-        if(!matches) { return 0; }
+        if (!matches) { return 0; }
         return matches.length;
     }
-
+    
     function processLine(line, skuParts, headers, constants, aliases) {
-
+        
         var depth = countTabs(line);
-        if(!skuParts[depth]){
+        if (!skuParts[depth]) {
             skuParts[depth] = [];
         }
         var text = line.trim();
         //check for comments
-        if(/^\-\-/.test(text)){
+        if (/^\-\-/.test(text)) {
             //do nothing
         }
         //check if it's option
-        else if(/^#|\^/.test(text)) {
+        else if (/^#|\^/.test(text)) {
             headers[depth] = text;
         }
         //or constant
-        else if(/^\$/.test(text)) {
+        else if (/^\$/.test(text)) {
             parseConstant(text, constants);
         }
-        else
-        {
+        else {
             //check for aliases. i.e.: P19=frameP19, like Mimeo
-            if(/\w+\=\w+/.test(text)) {
-              var parts = text.trim().split('=');
-              var key = parts[0];
-              var alias = parts[1];
-              aliases[headers[depth].toUpperCase() + key.toUpperCase()] = alias;
-              skuParts[depth].push(key);
+            if (/.*\=\w+/.test(text)) {
+                var parts = text.trim().split('=');
+                var key = parts[0];
+                var alias = parts[1];
+                
+                if (isVariable(key)) {
+                    key = getPatternForVariable(key);
+                }
+                
+                aliases[headers[depth].toUpperCase() + key.toUpperCase()] = alias;
+                skuParts[depth].push(key);
             }
             else {
-              skuParts[depth].push(text);
+                skuParts[depth].push(text);
             }
         }
     }
-
+    
     function parseConstant(text, constants) {
         var key = /^\$[\w]+/.exec(text).toString();
         key = key.replace('$', '');
-
+        
         var value = /[\w\s]+$/.exec(text).toString().trim();
-
+        
         constants[key] = value;
 
     }
-
+    
     function buildPattern(skuParts) {
         var pattern = "^";
-        for(var i = 0; i < skuParts.length; i++) {
+        for (var i = 0; i < skuParts.length; i++) {
             var parts = skuParts[i];
             var patternBlock = "";
-
-
-            for(var j = 0; j < parts.length; j++) {
-                if(j > 0){
+            
+            
+            for (var j = 0; j < parts.length; j++) {
+                if (j > 0) {
                     patternBlock += "|";
                 }
                 var part = parts[j];
                 //variables
-                if(isVariable(part)){
+                if (isVariable(part)) {
                     var variablePattern = getPatternForVariable(part);
                     patternBlock += variablePattern;
                 }
@@ -125,25 +129,25 @@ function SkuMapProcessor(fs, async) {
                     patternBlock += escapeRegExp(part);
                 }
             }
-
+            
             //wrap in parenthesis for capture.
             patternBlock = "(" + patternBlock + ")";
-
-
+            
+            
             pattern += patternBlock;
         };
         pattern += "$";
         return pattern;
     }
-
+    
     function escapeRegExp(str) {
-      return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
     }
-
+    
     function isVariable(line) {
         return /\{\w+\}/.test(line);
     }
-
+    
     function getPatternForVariable(line) {
         var variableName = /\w+/.exec(line).toString();
         return variables[variableName];
