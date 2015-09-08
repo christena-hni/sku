@@ -1,4 +1,9 @@
 {
+    "ALG02": {
+        "light": "10",
+        "material": "#E7D8B9",
+        "name": "All Grain White"
+    },
     "DOT62": {
         "light": "01",
         "material": "is{hnicorprender/culp-dotty-berry}&res=200",
