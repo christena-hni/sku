@@ -1,48 +1,77 @@
-module.exports = new SkuParser(require("./materials.js"));
-function SkuParser(materials){
+module.exports = new SkuParser(require("async"), require("./textilesApi.js"));
+
+function SkuParser(async, api) {
     this.testAndParse = testAndParse;
-    function testAndParse(sku, map) {
+
+    function testAndParse(sku, map, callback) {
         var expressions = Object.keys(map);
-        for (var i = 0; i < expressions.length; i++) {
-            var expression = expressions[i];
-            if(new RegExp(expression, "i").test(sku)){
-                var result = parse(sku, map[expression]);
-                return result;
+        var found = false;
+
+        expressions.forEach(function(expression) {
+            if (!found && new RegExp(expression, "i").test(sku)) {
+                parse(sku, map[expression], callback);
+                found = true;
             }
-        }
-        return null;
+        });
+
+        if (!found)
+            callback(null, null);
     }
 
-    function parse(sku, skumapItem) {
+    function parse(sku, skumapItem, cbParse) {
         var properties = {
             constants: skumapItem.constants,
             staticObjects: [],
             materials: []
         };
         var matches = sku.match(new RegExp(skumapItem.pattern, "i"));
-        for (var i = 0; i < skumapItem.headers.length; i++) {
-            var header = skumapItem.headers[i];
-            if(header) {
+        var headers = [];
+
+        skumapItem.headers.forEach(function(header) {
+            if (header)
+                headers.push(header);
+        });
+
+        async.each(headers, function(header, callback) {
+            var i = skumapItem.headers.indexOf(header);
+            if (header) {
                 //i + 1 because match 0 is the whole expression.
                 var value = matches[i + 1];
                 //if static overlap
-                if(/^\^/.test(header)) {
+                if (/^\^/.test(header)) {
                     //overriding with alias if found
-                    if(skumapItem.aliases[header.toUpperCase()+value.toUpperCase()]) {
-                      value = skumapItem.aliases[header.toUpperCase()+value.toUpperCase()];
+                    if (skumapItem.aliases[header.toUpperCase() + value.toUpperCase()]) {
+                        value = skumapItem.aliases[header.toUpperCase() + value.toUpperCase()];
                     }
                     properties.staticObjects.push(value);
+                    callback();
                 }
                 //if materials
-                else if(/^#/.test(header)) {
+                else if (/^#/.test(header)) {
                     var baseName = /\w+/.exec(header).toString();
-                    //check if we have that material
-                    if(materials.has(value)) {
-                        properties.materials.push(materials.getOption(baseName, value));
-                    }
+
+                    api.getMaterial(value, function(err, material) {
+                        if (material) {
+                            var objectName = baseName + (material.type === "texture" ? "0" : "1") + (material.light === "matte" ? "0" : "1");
+                            var objectValue = material.material;
+
+                            properties.materials.push([objectName, objectValue]);
+                            callback();
+                        }
+                        else {
+                            callback();
+                        }
+                    })
+                }
+                else {
+                    callback();
                 }
             }
-        }
-        return properties;
+            else {
+                callback();
+            }
+        }, function(err) {
+            cbParse(err, properties);
+        })
     }
 }

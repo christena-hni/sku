@@ -6,7 +6,7 @@
   "repository": "",
   "author": "Mateus Brant <brantm@allsteeloffice.com>",
   "dependencies": {
-    "async": "~0.2.8",
+    "async": "^0.2.10",
     "cors": "^2.7.1",
     "csvtojson": "^0.4.2",
     "express": "~3.2.4",

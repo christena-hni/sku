@@ -9,17 +9,17 @@ function SkuMapProcessor(fs, async) {
     this.processAll = processAll;
     
     function processAll(files, callback) {
-        
         async.map(
             files,
             function (file, callback) {
                 fs.readFile(file, 'utf8', function (err, text) {
                     if (err) {
+                        console.log(err);
                         callback(err, null);
                         return;
                     }
                     var mapItem = process(text);
-                    callback(null, mapItem)
+                    callback(null, mapItem);
                 })
             },
             function (err, results) {
@@ -30,8 +30,6 @@ function SkuMapProcessor(fs, async) {
                 callback(err, skuMap);
             }
         );
-
-
     }
     
     function process(text) {
