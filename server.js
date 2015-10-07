@@ -10,9 +10,24 @@ var skuMapProcessor = require('./skuMapProcessor.js'),
     skuImages = require("./skuImages.js");
 
 //TODO: Scan and load all SKU Maps from the base folder instead of specify each one manually
-var skus = _.map(["acuity.skumap", "seek.skumap", "19.skumap", "nimble-polished.skumap", "nimble-powdercoat.skumap", "sum-chair-alum.skumap", 'mimeo-work.skumap', 'mimeo-stool.skumap'], function(sku) {
-    return path.join(__dirname, "data/skuMaps", sku);
-});
+var skus = _.map([
+    "acuity.skumap", 
+    "seek.skumap", 
+    "19.skumap", 
+    "nimble-polished.skumap", 
+    "nimble-powdercoat.skumap", 
+    "sum-chair-alum.skumap", 
+    'mimeo-work.skumap', 
+    'mimeo-stool.skumap',
+    "relate-4-leg-stool.skumap",
+    "relate-side.skumap",
+    "relate-stool.skumap",
+    "relate-work-aluminum.skumap",
+    "relate-work.skumap",
+    ], 
+    function(sku) {
+        return path.join(__dirname, "data/skuMaps", sku);
+    });
 
 skuMapProcessor.processAll(skus, function(err, map) {
     if (err) {

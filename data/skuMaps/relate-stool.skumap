@@ -1,0 +1,45 @@
+RLS-
+	--back type and height
+	^back
+	MH
+	UH
+	UM
+		--arm type
+		^arm
+		P
+		W
+		C
+		A
+			FC
+			{nothing}
+				.
+					--cylinder
+					4
+						.
+							--casters/glides
+							^caster
+							0
+							1
+							2
+								.
+									--lumbar
+									^lumbar
+									L
+									N
+										.
+											--frame color
+											^frame
+											CBK
+											MGR
+											T
+												--mesh color
+												^mesh
+												LKM01
+												LKM02
+												{nothing}
+													.
+													{nothing}
+														--upholstery
+														#up
+														{fabric}
+$vignette=RelateWorkStool

@@ -1,0 +1,44 @@
+RL-
+	--back type and height
+	^backType
+	MH
+	UH
+	UM
+		--arm type
+		^armtype
+		P
+		W
+		C
+		A
+			FC
+			{nothing}
+				.
+					--cylinder
+					2
+					3
+						.
+							--casters
+							0
+							1
+								.
+									--lumbar
+									^lumbar
+									L
+									N
+										.
+											--frame color
+											^frameColor
+											CBK
+											MGR
+											T
+												--mesh color
+												^mesh
+												LKM01
+												LKM02
+												{nothing}
+													.
+													{nothing}
+														--upholstery
+														#up
+														{fabric}
+$vignette=Relate

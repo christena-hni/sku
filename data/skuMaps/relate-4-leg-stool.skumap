@@ -1,0 +1,51 @@
+RLC-
+	--back type
+	^back
+	M
+	U
+	W
+		U
+			--glide/caster
+			^glide
+			G
+			C
+				--arm type
+				^arm
+				O
+				A
+					FC
+					{nothing}
+						.
+							--caster/glide material
+							^casterMaterial
+							0
+							1
+							2
+								.
+									--frame color
+									^frame
+									CBK
+									P85
+									MGR
+									T
+									PR6
+										.
+											--mesh color
+											^mesh
+											LKM01
+											LKM02
+											{nothing}
+												.
+												{nothing}
+													--wood finish
+													^wood
+													NE800
+													NC777
+													NC701
+													{nothing}
+														.
+														{nothing}
+															--upholstery
+															#up
+															{fabric}
+$vignette=Relate4LegStool
