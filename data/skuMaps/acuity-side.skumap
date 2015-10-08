@@ -1,0 +1,36 @@
+ACM-MU
+	--caster or glide
+	^feet
+	C
+	G
+		--arm type
+		^arms
+		O
+		A
+			FC
+			{nothing}
+				.
+					--glide / caster type
+					^feetType
+					0
+					1
+					2
+					3
+						.
+							--frame color
+							^frame
+							P85
+							PR6
+							PQ8
+								.
+									--mesh
+									^mesh
+									BD
+									BM
+									TM
+									TL
+										.
+											--uphosltery
+											#up
+											{fabric}
+$vignette=AcuitySide

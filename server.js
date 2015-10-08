@@ -12,6 +12,7 @@ var skuMapProcessor = require('./skuMapProcessor.js'),
 //TODO: Scan and load all SKU Maps from the base folder instead of specify each one manually
 var skus = _.map([
     "acuity.skumap", 
+    "acuity-side.skumap", 
     "seek.skumap", 
     "19.skumap", 
     "nimble-polished.skumap", 
