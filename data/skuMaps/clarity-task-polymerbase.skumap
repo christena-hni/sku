@@ -1,0 +1,49 @@
+^chairtype
+CV
+	--arm type
+	^arm
+	O
+	A
+		--mesh only or mesh with jacket
+		^back
+		M
+		U
+			FC
+			{nothing}
+				.
+					--mesh color
+					^mesh
+					CM21
+					CM27
+					CM20
+					CM22
+					CM23
+					CM25
+					CM26
+					CM24
+						.
+							--frame colors
+							^frame
+							P4Q
+								.
+									--mesh carrier and arm pads
+									^armpads
+									G
+										.
+											--base color
+											^base
+											P71
+												.
+													--cylinder
+													2
+														.
+															--glides / casters
+															^feet
+															BHT
+																.
+																{nothing}
+																	--upholstery
+																	#up
+																	{fabric}
+																	{nothing}
+$vignette=ClarityTask

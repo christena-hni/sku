@@ -1,0 +1,56 @@
+^chairType
+C4
+	--arm type
+	^arm
+	O
+	A
+		--mesh only or mesh with jacket
+		^back
+		M
+		U
+			FC
+			{nothing}
+				.
+					--mesh color
+					^mesh
+					CM21
+					CM27
+					CM20
+					CM22
+					CM23
+					CM25
+					CM26
+					CM24
+						.
+							--frame colors
+							^frame
+							P4Q
+							PR6
+							PQ8
+							PAL
+								.
+									--mesh carrier and arm pads
+									^armpads
+									G
+									T
+										.
+											--base color
+											^base
+											P4Q=baseP4Q
+											PR6=basePR6
+											PQ8=basePQ8
+											PAL
+												.
+													--cylinder
+													5
+														.
+															--glides / casters
+															^feet
+															GLD
+																.
+																{nothing}
+																	--upholstery
+																	#up
+																	{fabric}
+																	{nothing}
+$vignette=ClarityGuest

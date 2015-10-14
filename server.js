@@ -25,6 +25,10 @@ var skus = _.map([
     "relate-stool.skumap",
     "relate-work-aluminum.skumap",
     "relate-work.skumap",
+    "clarity-task.skumap",
+    "clarity-task-polymerbase.skumap",
+    "clarity-lounge.skumap",
+    "clarity-guest.skumap",
     ], 
     function(sku) {
         return path.join(__dirname, "data/skuMaps", sku);
