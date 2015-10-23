@@ -1,0 +1,42 @@
+INSL-
+	^back
+	N
+	S
+	U
+		^arms
+		O
+		A
+			--nothing
+			FC
+			NO
+				.
+					--glide / caster type
+					^feetType
+					0
+					2
+					4
+						.
+							--arm cap
+							N
+							H
+							F
+								.
+									^frame
+									PR6
+									CBK
+										.
+											^sh
+											BLK
+											BU
+											BW
+											GN
+											GY
+											RD
+											RG
+											WT
+												.
+												{nothing}
+													#up
+													{fabric}
+													{nothing}
+$vignette=InspireSled
