@@ -2,7 +2,6 @@ var http = require('http'),
     path = require('path'),
     async = require('async'),
     express = require('express'),
-    _ = require("underscore"),
     cors = require("cors");
     glob = require("glob");
 
