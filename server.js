@@ -29,6 +29,8 @@ var skus = _.map([
     "clarity-task-polymerbase.skumap",
     "clarity-lounge.skumap",
     "clarity-guest.skumap",
+    "access-work.skumap",
+    "access-stool.skumap"
     ], 
     function(sku) {
         return path.join(__dirname, "data/skuMaps", sku);

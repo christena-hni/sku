@@ -1,0 +1,36 @@
+^baseModel
+ESS
+	-
+		^backs
+		M
+		J
+		U
+			^arms
+			W
+			H
+			F
+			A
+				--nothing
+				FC
+				NO
+					.
+						--cylinder
+						4
+							.
+								--caster
+								0
+								1
+									.
+										--frame
+										BLK
+											.
+												^base
+												BLK
+													.
+														AM10
+														{nothing}
+															.
+															{nothing}
+																#up
+																{fabric}
+$vignette=AccessStool

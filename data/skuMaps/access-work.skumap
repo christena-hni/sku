@@ -1,0 +1,39 @@
+^baseModel
+ESW
+EBW
+	-
+		^backs
+		M
+		J
+		U
+			^arms
+			W
+			H
+			P
+			F
+			A
+				--nothing
+				FC
+				NO
+					.
+						--cylinder
+						2
+							.
+								--caster
+								0
+								1
+									.
+										--frame
+										BLK
+											.
+												^base
+												BLK
+												PAL
+													.
+														AM10
+														{nothing}
+															.
+															{nothing}
+																#up
+																{fabric}
+$vignette=Access
