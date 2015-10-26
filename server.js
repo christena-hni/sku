@@ -152,43 +152,5 @@ skuMapProcessor.processAll(skus, function(err, map) {
                 });
             });
         });
-
-        // Examples:
-        // /api/fabrics/19_seat - Returns an array all fabrics allowed for the #19 chair seating
-        app.get("/api/fabrics/:product_part", function(req, res) {
-            var productPart = req.params.product_part;
-            res.json({
-                family: "Akimbo",
-                options: [{
-                    key: "DOL719",
-                    value: "Spradling Dolce Poppy",
-                    src: "http://s7d4.scene7.com/is/image/Allsteel/DOL719?wid=100"
-                }, {
-                    key: "DOL718",
-                    value: "Spradling Dolce Tangelo",
-                    src: "http://s7d4.scene7.com/is/image/Allsteel/DOL718?wid=100"
-                }, {
-                    key: "DOL701",
-                    value: "Spradling Dolce White",
-                    src: "http://s7d4.scene7.com/is/image/Allsteel/DOL701?wid=100"
-                }, {
-                    key: "DOL713",
-                    value: "Spradling Dolce Chocolate",
-                    src: "http://s7d4.scene7.com/is/image/Allsteel/DOL713?wid=100"
-                }, {
-                    key: "DOL723",
-                    value: "Spradling Dolce Peacock",
-                    src: "http://s7d4.scene7.com/is/image/Allsteel/DOL723?wid=100"
-                }, {
-                    key: "DOL708",
-                    value: "Spradling Dolce Mushroom",
-                    src: "http://s7d4.scene7.com/is/image/Allsteel/DOL708?wid=100"
-                }, {
-                    key: "DOL712",
-                    value: "Spradling Dolce Mocha",
-                    src: "http://s7d4.scene7.com/is/image/Allsteel/DOL712?wid=100"
-                }, ]
-            });
-        });
     }
 });
