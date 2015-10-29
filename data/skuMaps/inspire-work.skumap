@@ -1,0 +1,45 @@
+INTK-
+	^back
+	N
+	S
+	U
+		^arms
+		O
+		A
+			--nothing
+			FC
+			NO
+				.
+					--cylinder
+					2
+					3
+						.
+							--glide / caster type
+							^feetType
+							0
+							1
+								.
+									--arm cap
+									N
+									H
+									F
+										.
+											^frame
+											PR6
+											CBK
+												.
+													^sh
+													BLK
+													BU
+													BW
+													GN
+													GY
+													RD
+													RG
+													WT
+														.
+														{nothing}
+															#up
+															{fabric}
+															{nothing}
+$vignette=InspireWork
