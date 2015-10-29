@@ -1,0 +1,50 @@
+INSLT-
+	^back
+	N
+	S
+	U
+		^arms
+		A
+			^tablet
+			FR
+			FL
+				S
+					--nothing
+					FC
+					NO
+						.
+							--glide / caster type
+							^feetType
+							0
+							2
+							4
+								.
+									--arm cap
+									N
+										.
+											^frame
+											PR6
+											CBK
+												.
+													^sh
+													BLK
+													BU
+													BW
+													GN
+													GY
+													RD
+													RG
+													WT
+														.
+															^tabletLaminate
+															LT3E
+															LT8C
+															LT8A
+															LT8D
+															LWD
+																.
+																{nothing}
+																	#up
+																	{fabric}
+																	{nothing}
+$vignette=InspireSled
