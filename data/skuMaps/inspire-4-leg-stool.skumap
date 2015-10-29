@@ -1,0 +1,45 @@
+INFS-
+	^back
+	N
+	S
+	U
+		--caster or glide
+		^feet
+		G
+			^arms
+			O
+			A
+				--nothing
+				FC
+				NO
+					.
+						--glide / caster type
+						^feetType
+						0
+						1
+						2
+							.
+								--arm cap
+								N
+								H
+								F
+									.
+										^frame
+										PR6
+										CBK
+											.
+												^sh
+												BLK
+												BU
+												BW
+												GN
+												GY
+												RD
+												RG
+												WT
+													.
+													{nothing}
+														#up
+														{fabric}
+														{nothing}
+$vignette=InspireFourLegStool
