@@ -1,5 +1,5 @@
 module.exports = new(function(req) {
-    var _apiUrl = "http://qa-tf.azurewebsites.net/allsteel/details/#code#/scene7";
+    var _apiUrl = "http://qa-esapi.azurewebsites.net/allsteel/details/#code#/scene7";
 
     this.getMaterial = function(code, callback) {
         var url = _apiUrl.replace(/#code#/g, code);
