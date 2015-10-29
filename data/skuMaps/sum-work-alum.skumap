@@ -6,11 +6,13 @@ SUM-
 		O
 		W
 		A
+			--nothing
 			A
+				--firecode
 				FC
 				{nothing}
 					.
-						^cylinder
+						--cylinder
 						2
 						3
 							.
@@ -18,14 +20,15 @@ SUM-
 								0
 								1
 									.
+										--nothing
 										A1
 											.
-												^basefinish
+												^aluminumFinish
 												PAL
 													.
-														^framecolor
+														--frameColor
 														BLK
 															.
 																#up
 																{fabric}
-$vignette=sumchair
+$vignette=Sum

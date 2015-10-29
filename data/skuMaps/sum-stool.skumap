@@ -1,26 +1,26 @@
 SUM-S
-	#backheight
+	^backheight
 	H
 	M
-		#armtype
+		^armtype
 		O
 		W
 		A
+			--firecode
 			FC
 			{nothing}
 				.
-					#cylinder
+					--cylinder
 					4
 						.
-							#casters
+							^casters
 							0
 							1
 							2
 								.
-									#framecolor
+									^framecolor
 									BLK
 										.
-											#fabric
+											#up
 											{fabric}
-$vignette=sumstool
-$basefinish=BLK
+$vignette=SumStool
