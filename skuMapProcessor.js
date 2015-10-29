@@ -42,7 +42,6 @@ function SkuMapProcessor(fs, async) {
             processLine(line, skuParts, headers, constants, aliases);
         });
         var pattern = buildPattern(skuParts);
-        console.log(pattern);
         return {
             headers: headers,
             pattern: pattern,

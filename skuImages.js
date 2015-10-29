@@ -19,7 +19,8 @@ module.exports = new(function(skuParser, async, views, farmConnector) {
     function all(sku, map, size, callback) {
         skuParser.testAndParse(sku, map, function(err, options) {
             var vignette = options.constants.vignette;
-            var allViews = views.allViews();
+            var viewCount = options.constants.views != null ? options.constants.views : 6;
+            var allViews = views.allViews(viewCount);
             var size = size != null ? size : defaultSize;
 
             async.map(

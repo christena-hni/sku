@@ -4,18 +4,26 @@ module.exports = new (function() {
     this.allViews = allViews;
     this.defaultView = defaultView;
     
+    var halfAngles = [];
+    halfAngles[30] = "0030",
+    halfAngles[90] = "0090",
+    halfAngles[180] = "0180",
+    halfAngles[210] = "0210",
+    halfAngles[270] = "0270",
+    halfAngles[360] = "0000"
+
     var angles = [];
     angles[30] = "0030",
-    //angles[60] = "0060",
+    angles[60] = "0060",
     angles[90] = "0090",
-    //angles[120] = "0120",
-    //angles[150] = "0150",
+    angles[120] = "0120",
+    angles[150] = "0150",
     angles[180] = "0180",
     angles[210] = "0210",
-    //angles[240] = "0240",
+    angles[240] = "0240",
     angles[270] = "0270",
-    //angles[300] = "0300",
-    //angles[330] = "0330",
+    angles[300] = "0300",
+    angles[330] = "0330",
     angles[360] = "0000"
     
     var anglesPlusZero = [];
@@ -44,11 +52,19 @@ module.exports = new (function() {
         return closest;
     }
     
-    function allViews() {
+    function allViews(viewCount) {
         var allViews = [];
-        angles.forEach(function(angle) {
-            allViews.push(angle);
-        });
+        
+        if(viewCount == 12) {
+            angles.forEach(function(angle) {
+                allViews.push(angle);
+            });    
+        } else {
+            halfAngles.forEach(function(angle) {
+                allViews.push(angle);
+            });
+        }
+        
         return allViews;
     }
 })();
